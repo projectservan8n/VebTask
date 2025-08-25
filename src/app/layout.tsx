@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'VebTask',
-  description: 'Task management application with Clerk authentication',
+  description: 'Task management application with Clerk authentication - Convex ready',
 }
 
 export default function RootLayout({
@@ -25,3 +25,4 @@ export default function RootLayout({
     </ClerkProvider>
   )
 }
+

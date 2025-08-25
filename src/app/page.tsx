@@ -10,24 +10,26 @@ import {
 } from '@clerk/nextjs'
 import { useState } from 'react'
 
+interface Task {
+  _id: string;
+  title: string;
+  completed: boolean;
+  userId?: string;
+  createdAt: number;
+}
+
 export default function Home() {
   const { user } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
   
-  // Task management with local state (Convex integration ready)
-  const [tasks, setTasks] = useState<Array<{
-    _id: string;
-    title: string;
-    completed: boolean;
-    userId?: string;
-    createdAt: number;
-  }>>([])
+  // Local state management (Convex integration ready for future)
+  const [tasks, setTasks] = useState<Task[]>([])
   
-  // These will be replaced with real Convex calls once properly configured
-  const createTaskMock = async (task: { title: string }) => {
+  // Mock functions for task management (will be replaced with Convex)
+  const createTask = async ({ title }: { title: string }) => {
     const newTask = {
       _id: Date.now().toString(),
-      title: task.title,
+      title,
       completed: false,
       userId: user?.id,
       createdAt: Date.now()
@@ -35,13 +37,13 @@ export default function Home() {
     setTasks(prev => [newTask, ...prev])
   }
   
-  const updateTaskMock = async ({ id, completed }: { id: string; completed: boolean }) => {
+  const updateTask = async ({ id, completed }: { id: string; completed: boolean }) => {
     setTasks(prev => prev.map(task => 
       task._id === id ? { ...task, completed } : task
     ))
   }
   
-  const removeTaskMock = async ({ id }: { id: string }) => {
+  const removeTask = async ({ id }: { id: string }) => {
     setTasks(prev => prev.filter(task => task._id !== id))
   }
 
@@ -50,7 +52,7 @@ export default function Home() {
     if (!newTaskTitle.trim() || !user) return
     
     try {
-      await createTaskMock({
+      await createTask({
         title: newTaskTitle,
       })
       setNewTaskTitle('')
@@ -59,9 +61,9 @@ export default function Home() {
     }
   }
 
-  const toggleTask = async (taskId: string, completed: boolean) => {
+  const toggleTask = async (taskId: any, completed: boolean) => {
     try {
-      await updateTaskMock({
+      await updateTask({
         id: taskId,
         completed: !completed,
       })
@@ -70,9 +72,9 @@ export default function Home() {
     }
   }
 
-  const deleteTask = async (taskId: string) => {
+  const deleteTask = async (taskId: any) => {
     try {
-      await removeTaskMock({ id: taskId })
+      await removeTask({ id: taskId })
     } catch (error) {
       console.error('Error deleting task:', error)
     }
