@@ -10,23 +10,37 @@ export default function SignUpPage() {
           </h1>
           <p className="text-slate-600">Create your account and start managing tasks</p>
         </div>
-        <SignUp 
-          signInUrl="/sign-in"
-          redirectUrl="/"
-          afterSignUpUrl="/"
-          appearance={{
-            elements: {
-              rootBox: "mx-auto",
-              card: "bg-white shadow-2xl border-0 rounded-3xl",
-              headerTitle: "text-2xl font-bold text-slate-800",
-              headerSubtitle: "text-slate-600",
-              socialButtonsBlockButton: "bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 hover:bg-slate-50",
-              formFieldInput: "border-2 border-slate-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl",
-              formButtonPrimary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl font-semibold",
-              footerActionLink: "text-blue-600 hover:text-blue-700"
-            }
-          }}
-        />
+        <div className="space-y-4">
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-xl">
+            <div className="flex">
+              <div className="ml-3">
+                <p className="text-sm text-yellow-700">
+                  <strong>Having CAPTCHA issues?</strong> Try signing up with Google or GitHub below, or use a different browser.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <SignUp 
+            signInUrl="/sign-in"
+            redirectUrl="/"
+            afterSignUpUrl="/"
+            appearance={{
+              elements: {
+                rootBox: "mx-auto",
+                card: "bg-white shadow-2xl border-0 rounded-3xl",
+                headerTitle: "text-2xl font-bold text-slate-800",
+                headerSubtitle: "text-slate-600", 
+                socialButtonsBlockButton: "bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 hover:bg-slate-50 font-medium",
+                socialButtonsBlockButtonText: "font-medium",
+                formFieldInput: "border-2 border-slate-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl",
+                formButtonPrimary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl font-semibold",
+                footerActionLink: "text-blue-600 hover:text-blue-700",
+                identityPreviewEditButton: "text-blue-600 hover:text-blue-700"
+              }
+            }}
+          />
+        </div>
       </div>
     </div>
   )
