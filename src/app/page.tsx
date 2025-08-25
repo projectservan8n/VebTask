@@ -92,32 +92,24 @@ export default function Home() {
         <div className="flex justify-between items-center mb-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">VebTask</h1>
           <div className="flex items-center gap-4">
-            {!mounted ? (
-              <div className="text-gray-500">Loading...</div>
-            ) : !isLoaded ? (
-              <div className="text-gray-500">Initializing auth...</div>
-            ) : (
-              <>
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
-                      Sign In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
-                      Sign Up
-                    </button>
-                  </SignUpButton>
-                </SignedOut>
-                <SignedIn>
-                  <span className="text-gray-600">
-                    Welcome, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
-                  </span>
-                  <UserButton afterSignOutUrl="/" />
-                </SignedIn>
-              </>
-            )}
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <span className="text-gray-600">
+                Welcome, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
+              </span>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
           </div>
         </div>
 
