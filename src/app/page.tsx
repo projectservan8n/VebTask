@@ -9,15 +9,19 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
+import { useQuery, useMutation } from 'convex/react'
+import api from '../../convex/_generated/api'
 import { useState } from 'react'
 
 export default function Home() {
   const { user, isSignedIn } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
+  
+  // Convex queries and mutations (will connect when properly configured)
   const [tasks, setTasks] = useState<any[]>([])
   
-  // Mock task operations for now - will be replaced with real Convex calls
-  const createTask = async (task: { title: string }) => {
+  // These will be replaced with real Convex calls once properly configured
+  const createTaskMock = async (task: { title: string }) => {
     const newTask = {
       _id: Date.now().toString(),
       title: task.title,
@@ -28,13 +32,13 @@ export default function Home() {
     setTasks(prev => [newTask, ...prev])
   }
   
-  const updateTask = async ({ id, completed }: any) => {
+  const updateTaskMock = async ({ id, completed }: any) => {
     setTasks(prev => prev.map(task => 
       task._id === id ? { ...task, completed } : task
     ))
   }
   
-  const removeTask = async ({ id }: any) => {
+  const removeTaskMock = async ({ id }: any) => {
     setTasks(prev => prev.filter(task => task._id !== id))
   }
 
@@ -43,7 +47,7 @@ export default function Home() {
     if (!newTaskTitle.trim() || !user) return
     
     try {
-      await createTask({
+      await createTaskMock({
         title: newTaskTitle,
       })
       setNewTaskTitle('')
@@ -54,7 +58,7 @@ export default function Home() {
 
   const toggleTask = async (taskId: any, completed: boolean) => {
     try {
-      await updateTask({
+      await updateTaskMock({
         id: taskId,
         completed: !completed,
       })
@@ -65,7 +69,7 @@ export default function Home() {
 
   const deleteTask = async (taskId: any) => {
     try {
-      await removeTask({ id: taskId })
+      await removeTaskMock({ id: taskId })
     } catch (error) {
       console.error('Error deleting task:', error)
     }

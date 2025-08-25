@@ -1,8 +1,12 @@
 [build]
-command = "npm install && npm run build"
+command = "npm ci && npm run build"
 
 [deploy]
 startCommand = "npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
 
 [env]
 NODE_ENV = "production"
+NEXT_TELEMETRY_DISABLED = "1"
