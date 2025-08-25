@@ -8,7 +8,7 @@ import {
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Task {
   _id: string;
@@ -19,8 +19,13 @@ interface Task {
 }
 
 export default function Home() {
-  const { user } = useUser()
+  const { user, isLoaded } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   
   // Local state management (Convex integration ready for future)
   const [tasks, setTasks] = useState<Task[]>([])
@@ -87,24 +92,32 @@ export default function Home() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">VebTask</h1>
           <div className="flex items-center gap-4">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <span className="text-gray-600">
-                Welcome, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
-              </span>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+            {!mounted ? (
+              <div className="text-gray-500">Loading...</div>
+            ) : !isLoaded ? (
+              <div className="text-gray-500">Initializing auth...</div>
+            ) : (
+              <>
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+                      Sign Up
+                    </button>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <span className="text-gray-600">
+                    Welcome, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
+                  </span>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+              </>
+            )}
           </div>
         </div>
 
