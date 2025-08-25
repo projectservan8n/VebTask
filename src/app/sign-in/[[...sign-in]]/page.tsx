@@ -11,6 +11,9 @@ export default function SignInPage() {
           <p className="text-slate-600">Welcome back to your task management workspace</p>
         </div>
         <SignIn 
+          signUpUrl="/sign-up"
+          redirectUrl="/"
+          afterSignInUrl="/"
           appearance={{
             elements: {
               rootBox: "mx-auto",

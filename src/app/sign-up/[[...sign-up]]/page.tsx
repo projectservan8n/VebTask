@@ -11,6 +11,9 @@ export default function SignUpPage() {
           <p className="text-slate-600">Create your account and start managing tasks</p>
         </div>
         <SignUp 
+          signInUrl="/sign-in"
+          redirectUrl="/"
+          afterSignUpUrl="/"
           appearance={{
             elements: {
               rootBox: "mx-auto",
