@@ -35,7 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# convex
+# convex (excluded from Railway deployment)
+convex/
+convex-backup/
 /convex/_generated
 
 # backup and temporary files
