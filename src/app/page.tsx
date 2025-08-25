@@ -2,19 +2,16 @@
 
 import {
   SignInButton,
-  SignOutButton,
   SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
   useUser
 } from '@clerk/nextjs'
-import { useQuery, useMutation } from 'convex/react'
-import api from '../../convex/_generated/api'
 import { useState } from 'react'
 
 export default function Home() {
-  const { user, isSignedIn } = useUser()
+  const { user } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
   
   // Convex queries and mutations (will connect when properly configured)

@@ -37,3 +37,9 @@ next-env.d.ts
 
 # convex
 /convex/_generated
+
+# backup and temporary files
+*-backup.*
+*-simple.*
+page-backup.tsx
+page-simple.tsx
