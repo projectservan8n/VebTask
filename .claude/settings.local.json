@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\Users\\USER''S\\Desktop\\orbitask-ai-main\")",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx convex dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx convex:*)",
+      "Bash(npm install:*)",
+      "Bash(npm start)",
+      "Bash(npm start:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\Users\\USER''''S\\Desktop"
+    ]
+  }
+}

@@ -1,73 +1,112 @@
-# Welcome to your Lovable project
+# OrbiTask AI
 
-## Project info
+A modern task management application built with Next.js, Convex.dev for the database, and Clerk.com for authentication.
 
-**URL**: https://lovable.dev/projects/c663584e-a7df-4dc4-83ed-6118f9a4db7d
+## Features
 
-## How can I edit this code?
+- ✅ User authentication with Clerk
+- 📝 Create, read, update, and delete tasks
+- 🔄 Real-time updates with Convex
+- 🎨 Modern UI with Tailwind CSS
+- 📱 Responsive design
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Database**: Convex.dev (real-time database)
+- **Authentication**: Clerk.com
+- **Styling**: Tailwind CSS
+- **Deployment**: Ready for Vercel
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c663584e-a7df-4dc4-83ed-6118f9a4db7d) and start prompting.
+## Setup Instructions
 
-Changes made via Lovable will be committed automatically to this repo.
+### 1. Clone and Install
 
-**Use your preferred IDE**
+```bash
+cd orbitask-ai-main
+npm install
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 2. Set up Convex
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Sign up at [convex.dev](https://convex.dev)
+2. Install Convex CLI: `npm install -g convex`
+3. Login to Convex: `npx convex login`
+4. Initialize your Convex project: `npx convex dev --configure`
+5. Copy the deployment URL to your `.env.local` file
 
-Follow these steps:
+### 3. Set up Clerk
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Sign up at [clerk.com](https://clerk.com)
+2. Create a new application
+3. Copy your publishable key and secret key to your `.env.local` file
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 4. Environment Variables
 
-# Step 3: Install the necessary dependencies.
-npm i
+Copy `.env.example` to `.env.local` and fill in your credentials:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```env
+# Convex Configuration
+NEXT_PUBLIC_CONVEX_URL=your-convex-deployment-url-here
+CONVEX_DEPLOY_KEY=your-convex-deploy-key-here
+
+# Clerk Configuration
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key-here
+CLERK_SECRET_KEY=your-clerk-secret-key-here
+```
+
+### 5. Run Development Server
+
+```bash
+# Start Convex backend
+npm run convex
+
+# In another terminal, start Next.js
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Visit [http://localhost:3000](http://localhost:3000) to see your application.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Project Structure
 
-**Use GitHub Codespaces**
+```
+├── convex/                 # Convex backend functions
+│   ├── schema.ts          # Database schema
+│   ├── tasks.ts           # Task CRUD operations
+│   └── users.ts           # User management
+├── src/
+│   ├── app/               # Next.js app directory
+│   │   ├── layout.tsx     # Root layout with providers
+│   │   ├── page.tsx       # Main application page
+│   │   └── globals.css    # Global styles
+│   └── lib/
+│       └── convex.ts      # Convex client setup
+└── ...
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Available Scripts
 
-## What technologies are used for this project?
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run convex` - Start Convex development server
+- `npm run lint` - Run ESLint
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Deploy to Vercel:
+   - Connect your repository to Vercel
+   - Add environment variables in Vercel dashboard
+   - Deploy automatically
 
-## How can I deploy this project?
+2. Deploy Convex:
+   - Run `npx convex deploy` to deploy your backend
+   - Update environment variables with production URLs
 
-Simply open [Lovable](https://lovable.dev/projects/c663584e-a7df-4dc4-83ed-6118f9a4db7d) and click on Share -> Publish.
+## Contributing
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
