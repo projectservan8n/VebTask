@@ -1,14 +1,12 @@
 'use client'
 
 import {
-  SignInButton,
-  SignUpButton,
   SignedIn,
-  SignedOut,
   UserButton,
   useUser
 } from '@clerk/nextjs'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface Task {
   _id: string;
@@ -19,16 +17,33 @@ interface Task {
 }
 
 export default function Home() {
-  const { user, isLoaded } = useUser()
+  const { user, isSignedIn, isLoaded } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
-  const [mounted, setMounted] = useState(false)
+  const [tasks, setTasks] = useState<Task[]>([])
+  const router = useRouter()
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-  
-  // Local state management (Convex integration ready for future)
-  const [tasks, setTasks] = useState<Task[]>([])
+    if (isLoaded && !isSignedIn) {
+      router.push('/sign-in')
+    }
+  }, [isLoaded, isSignedIn, router])
+
+  // Show loading while checking auth or redirecting
+  if (!isLoaded || !isSignedIn) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center animate-pulse">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">VebTask</h1>
+          <p className="text-slate-500 mt-2">Loading your workspace...</p>
+        </div>
+      </div>
+    )
+  }
   
   // Mock functions for task management (will be replaced with Convex)
   const createTask = async ({ title }: { title: string }) => {
@@ -89,84 +104,19 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header with authentication */}
+        {/* Clean header for authenticated users */}
         <div className="flex justify-between items-center mb-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">VebTask</h1>
           <div className="flex items-center gap-4">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <span className="text-gray-600">
-                Welcome, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
-              </span>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+            <span className="text-slate-600">
+              Welcome back, {user?.firstName || user?.emailAddresses[0]?.emailAddress}
+            </span>
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
         </div>
 
-        <SignedOut>
-          <div className="text-center py-16">
-            <div className="max-w-lg mx-auto">
-              {/* Hero Section */}
-              <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 mb-8">
-                <div className="mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                    </svg>
-                  </div>
-                  <h2 className="text-3xl font-bold text-slate-800 mb-3">Welcome to VebTask!</h2>
-                  <p className="text-slate-600 text-lg leading-relaxed">
-                    Your AI-powered task management application with secure authentication and real-time collaboration
-                  </p>
-                </div>
-                
-                {/* Feature highlights */}
-                <div className="grid grid-cols-1 gap-4 mb-8">
-                  <div className="flex items-center text-slate-700">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                    <span>Secure authentication with Clerk</span>
-                  </div>
-                  <div className="flex items-center text-slate-700">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                    <span>Real-time task synchronization</span>
-                  </div>
-                  <div className="flex items-center text-slate-700">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                    <span>Beautiful, responsive interface</span>
-                  </div>
-                </div>
-
-                {/* Auth buttons */}
-                <div className="space-y-3">
-                  <SignInButton mode="modal">
-                    <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
-                      Sign In to Get Started
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
-                      Create Your Account
-                    </button>
-                  </SignUpButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SignedOut>
-
-        <SignedIn>
-          {/* Task Management Interface */}
-          <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-8">
+        {/* Task Management Interface */}
+        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 mb-8">
             <form onSubmit={handleCreateTask} className="mb-6">
               <div className="flex gap-3">
                 <input
@@ -223,8 +173,7 @@ export default function Home() {
                 <p className="text-slate-400 text-sm">Create your first task above to get started!</p>
               </div>
             )}
-          </div>
-        </SignedIn>
+        </div>
       </div>
     </main>
   )
