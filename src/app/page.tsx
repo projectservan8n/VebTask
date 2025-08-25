@@ -14,8 +14,14 @@ export default function Home() {
   const { user } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
   
-  // Convex queries and mutations (will connect when properly configured)
-  const [tasks, setTasks] = useState<any[]>([])
+  // Task management with local state (Convex integration ready)
+  const [tasks, setTasks] = useState<Array<{
+    _id: string;
+    title: string;
+    completed: boolean;
+    userId?: string;
+    createdAt: number;
+  }>>([])
   
   // These will be replaced with real Convex calls once properly configured
   const createTaskMock = async (task: { title: string }) => {
@@ -29,13 +35,13 @@ export default function Home() {
     setTasks(prev => [newTask, ...prev])
   }
   
-  const updateTaskMock = async ({ id, completed }: any) => {
+  const updateTaskMock = async ({ id, completed }: { id: string; completed: boolean }) => {
     setTasks(prev => prev.map(task => 
       task._id === id ? { ...task, completed } : task
     ))
   }
   
-  const removeTaskMock = async ({ id }: any) => {
+  const removeTaskMock = async ({ id }: { id: string }) => {
     setTasks(prev => prev.filter(task => task._id !== id))
   }
 
@@ -53,7 +59,7 @@ export default function Home() {
     }
   }
 
-  const toggleTask = async (taskId: any, completed: boolean) => {
+  const toggleTask = async (taskId: string, completed: boolean) => {
     try {
       await updateTaskMock({
         id: taskId,
@@ -64,7 +70,7 @@ export default function Home() {
     }
   }
 
-  const deleteTask = async (taskId: any) => {
+  const deleteTask = async (taskId: string) => {
     try {
       await removeTaskMock({ id: taskId })
     } catch (error) {
@@ -144,7 +150,7 @@ export default function Home() {
           </form>
 
           <div className="space-y-4">
-            {tasks?.map((task: any) => (
+            {tasks.map((task) => (
               <div
                 key={task._id}
                 className="flex items-center gap-4 p-4 bg-white rounded-lg shadow border"
