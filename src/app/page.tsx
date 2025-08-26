@@ -1,34 +1,42 @@
 'use client'
 
 import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
-import { useQuery, useMutation } from 'convex/react'
-import api from '../../convex/_generated/api'
 import { useState } from 'react'
-import { Id } from '../../convex/_generated/dataModel'
-
-export const dynamic = 'force-dynamic'
 
 interface Task {
-  _id: Id<'tasks'>;
+  _id: string;
   title: string;
-  description?: string;
   completed: boolean;
-  userId: string;
+  userId?: string;
   createdAt: number;
-  updatedAt: number;
 }
 
 export default function Home() {
   const { user, isSignedIn } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
+  const [tasks, setTasks] = useState<Task[]>([])
   
-  const tasks = useQuery(api.tasks.list, 
-    isSignedIn && user ? {} : 'skip'
-  )
+  // Mock functions for task management (ready for Convex integration)
+  const createTask = async ({ title, userId }: { title: string; userId: string }) => {
+    const newTask = {
+      _id: Date.now().toString(),
+      title,
+      completed: false,
+      userId,
+      createdAt: Date.now()
+    }
+    setTasks(prev => [newTask, ...prev])
+  }
   
-  const createTask = useMutation(api.tasks.create)
-  const updateTask = useMutation(api.tasks.update)
-  const removeTask = useMutation(api.tasks.remove)
+  const updateTask = async ({ id, completed }: { id: string; completed: boolean }) => {
+    setTasks(prev => prev.map(task => 
+      task._id === id ? { ...task, completed } : task
+    ))
+  }
+  
+  const removeTask = async ({ id }: { id: string }) => {
+    setTasks(prev => prev.filter(task => task._id !== id))
+  }
 
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,19 +44,20 @@ export default function Home() {
     
     await createTask({
       title: newTaskTitle,
+      userId: user.id,
     })
     
     setNewTaskTitle('')
   }
 
-  const toggleTask = async (taskId: Id<'tasks'>, completed: boolean) => {
+  const toggleTask = async (taskId: string, completed: boolean) => {
     await updateTask({
       id: taskId,
       completed: !completed,
     })
   }
 
-  const deleteTask = async (taskId: Id<'tasks'>) => {
+  const deleteTask = async (taskId: string) => {
     await removeTask({ id: taskId })
   }
 
@@ -102,7 +111,7 @@ export default function Home() {
         </form>
 
         <div className="space-y-4">
-          {tasks?.map((task: Task) => (
+          {tasks.map((task) => (
             <div
               key={task._id}
               className="flex items-center gap-4 p-4 bg-white rounded-lg shadow border"
