@@ -2,7 +2,7 @@ import { SignIn } from '@clerk/nextjs'
 
 export default function SignInPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="sign-in-page min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -28,29 +28,11 @@ export default function SignInPage() {
         </div>
 
         {/* Glassmorphism Container */}
-        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-1">
+        <div className="w-full max-w-md mx-auto">
           <SignIn 
             signUpUrl="/sign-up"
             redirectUrl="/"
             afterSignInUrl="/"
-            appearance={{
-              elements: {
-                rootBox: "mx-auto",
-                card: "bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl",
-                headerTitle: "text-2xl font-bold text-white mb-2",
-                headerSubtitle: "text-white/70",
-                socialButtonsBlockButton: "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white font-medium transition-all duration-300 hover:scale-105",
-                socialButtonsBlockButtonText: "text-white font-medium",
-                formFieldInput: "bg-white/10 backdrop-blur-sm border border-white/30 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 rounded-xl text-white placeholder-white/60",
-                formFieldLabel: "text-white/90 font-medium",
-                formButtonPrimary: "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 border-0 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105",
-                footerActionLink: "text-blue-300 hover:text-blue-200 font-medium",
-                dividerLine: "bg-white/20",
-                dividerText: "text-white/70",
-                identityPreviewText: "text-white/90",
-                identityPreviewEditButton: "text-blue-300 hover:text-blue-200"
-              }
-            }}
           />
         </div>
         
