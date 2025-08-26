@@ -2,25 +2,52 @@ import { SignUp } from '@clerk/nextjs'
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-            VebTask
-          </h1>
-          <p className="text-slate-600">Create your account and start managing tasks</p>
-        </div>
-        <div className="space-y-4">
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-xl">
-            <div className="flex">
-              <div className="ml-3">
-                <p className="text-sm text-yellow-700">
-                  <strong>Having CAPTCHA issues?</strong> Try signing up with Google or GitHub below, or use a different browser.
-                </p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-emerald-400 to-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-40 left-40 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-md">
+        {/* VebTask Logo and Branding */}
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl shadow-lg flex items-center justify-center backdrop-blur-sm">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
             </div>
           </div>
-          
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-3 drop-shadow-lg">
+            VebTask
+          </h1>
+          <p className="text-white/80 text-lg font-medium">Join thousands of productive users</p>
+          <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto mt-3"></div>
+        </div>
+
+        {/* CAPTCHA Warning */}
+        <div className="backdrop-blur-xl bg-amber-500/10 border border-amber-400/30 rounded-2xl p-4 mb-6">
+          <div className="flex items-center">
+            <div className="flex-shrink-0 mr-3">
+              <svg className="w-5 h-5 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-amber-100 text-sm font-medium">
+                <strong>Having CAPTCHA issues?</strong> Try signing up with Google/GitHub below, or use our{' '}
+                <a href="/register" className="underline decoration-2 underline-offset-2 hover:text-amber-200 transition-colors">
+                  CAPTCHA-free registration
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Glassmorphism Container */}
+        <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-1">
           <SignUp 
             signInUrl="/sign-in"
             redirectUrl="/"
@@ -28,15 +55,21 @@ export default function SignUpPage() {
             appearance={{
               elements: {
                 rootBox: "mx-auto",
-                card: "bg-white shadow-2xl border-0 rounded-3xl",
-                headerTitle: "text-2xl font-bold text-slate-800",
-                headerSubtitle: "text-slate-600", 
-                socialButtonsBlockButton: "bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 hover:bg-slate-50 font-medium",
-                socialButtonsBlockButtonText: "font-medium",
-                formFieldInput: "border-2 border-slate-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl",
-                formButtonPrimary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl font-semibold",
-                footerActionLink: "text-blue-600 hover:text-blue-700",
-                identityPreviewEditButton: "text-blue-600 hover:text-blue-700"
+                card: "bg-white/5 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl",
+                headerTitle: "text-2xl font-bold text-white mb-2",
+                headerSubtitle: "text-white/70",
+                socialButtonsBlockButton: "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white font-medium transition-all duration-300 hover:scale-105",
+                socialButtonsBlockButtonText: "text-white font-medium",
+                formFieldInput: "bg-white/10 backdrop-blur-sm border border-white/30 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 rounded-xl text-white placeholder-white/60",
+                formFieldLabel: "text-white/90 font-medium",
+                formButtonPrimary: "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 border-0 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105",
+                footerActionLink: "text-cyan-300 hover:text-cyan-200 font-medium",
+                dividerLine: "bg-white/20",
+                dividerText: "text-white/70",
+                identityPreviewText: "text-white/90",
+                identityPreviewEditButton: "text-cyan-300 hover:text-cyan-200",
+                formHeaderTitle: "text-white font-bold",
+                formHeaderSubtitle: "text-white/70"
               }
             }}
           />
