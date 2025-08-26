@@ -46,6 +46,35 @@ body {
   animation-delay: 4s;
 }
 
+/* Force auth page backgrounds to show */
+.sign-in-page,
+.sign-up-page {
+  background: linear-gradient(135deg, #1e1b4b, #581c87, #be185d) !important;
+  min-height: 100vh !important;
+}
+
+/* Ensure animated blobs are visible */
+.animate-blob {
+  display: block !important;
+  opacity: 0.7 !important;
+  filter: blur(40px) !important;
+  mix-blend-mode: multiply !important;
+}
+
+/* VebTask branding visibility */
+.auth-logo {
+  background: linear-gradient(135deg, #60a5fa, #a855f7) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.auth-title {
+  background: linear-gradient(135deg, #ddd6fe, #a7f3d0, #fce7f3) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
 /* Clerk Component Overrides for Glassmorphism */
 .cl-rootBox {
   width: 100% !important;

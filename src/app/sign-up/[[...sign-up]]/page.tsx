@@ -14,17 +14,17 @@ export default function SignUpPage() {
         {/* VebTask Logo and Branding */}
         <div className="text-center mb-6">
           <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl shadow-lg flex items-center justify-center backdrop-blur-sm">
+            <div className="auth-logo w-16 h-16 rounded-2xl shadow-lg flex items-center justify-center">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
             </div>
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-3 drop-shadow-lg">
+          <h1 className="auth-title text-6xl font-black mb-4">
             VebTask
           </h1>
-          <p className="text-white/80 text-lg font-medium">Join thousands of productive users</p>
-          <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto mt-3"></div>
+          <p className="text-white text-xl font-medium mb-4">Join thousands of productive users</p>
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto shadow-lg"></div>
         </div>
 
         {/* CAPTCHA Warning */}

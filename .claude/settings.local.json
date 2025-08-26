@@ -18,7 +18,8 @@
       "Bash(npm run lint)",
       "Read(/C:\\Users\\USER'S/**)",
       "Read(/C:\\Users/**)",
-      "Read(/C:\\Users\\USER'S/**)"
+      "Read(/C:\\Users\\USER'S/**)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": [],
