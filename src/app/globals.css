@@ -53,6 +53,11 @@ body {
   min-height: 100vh !important;
 }
 
+.register-page {
+  background: linear-gradient(135deg, #064e3b, #0f766e, #0891b2) !important;
+  min-height: 100vh !important;
+}
+
 /* Ensure animated blobs are visible */
 .animate-blob {
   display: block !important;

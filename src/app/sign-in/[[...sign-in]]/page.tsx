@@ -40,9 +40,9 @@ export default function SignInPage() {
         <div className="text-center mt-6">
           <div className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-2xl p-4">
             <p className="text-white/80 text-sm leading-relaxed">
-              Having trouble with sign-up? Try our{' '}
+              Need help?{' '}
               <a href="/register" className="text-blue-300 hover:text-blue-200 font-medium underline decoration-2 underline-offset-2 transition-all duration-300 hover:decoration-blue-200">
-                CAPTCHA-free registration
+                Alternative registration
               </a>
             </p>
           </div>

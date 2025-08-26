@@ -40,7 +40,7 @@ export default function FallbackRegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="register-page min-h-screen bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -61,7 +61,7 @@ export default function FallbackRegisterPage() {
           <h1 className="text-5xl font-bold bg-gradient-to-r from-emerald-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent mb-3 drop-shadow-lg">
             VebTask
           </h1>
-          <p className="text-white/80 text-lg font-medium">CAPTCHA-free registration</p>
+          <p className="text-white/80 text-lg font-medium">Simple registration</p>
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full mx-auto mt-3"></div>
         </div>
 
@@ -69,7 +69,7 @@ export default function FallbackRegisterPage() {
         <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-8">
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-white mb-2">Create Account</h2>
-            <p className="text-white/70 text-sm">No CAPTCHA required - Simple & fast</p>
+            <p className="text-white/70 text-sm">Quick & easy signup</p>
             <div className="flex items-center justify-center mt-3">
               <svg className="w-5 h-5 text-emerald-300 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
