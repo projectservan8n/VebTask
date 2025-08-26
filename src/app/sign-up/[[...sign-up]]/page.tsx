@@ -23,7 +23,7 @@ export default function SignUpPage() {
           <h1 className="auth-title text-6xl font-black mb-4">
             VebTask
           </h1>
-          <p className="text-white text-xl font-medium mb-4">Join thousands of productive users</p>
+          <p className="text-white text-xl font-medium mb-4">Get started</p>
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto shadow-lg"></div>
         </div>
 

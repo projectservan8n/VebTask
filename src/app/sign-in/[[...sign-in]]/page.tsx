@@ -23,7 +23,7 @@ export default function SignInPage() {
           <h1 className="auth-title text-6xl font-black mb-4">
             VebTask
           </h1>
-          <p className="text-white text-xl font-medium mb-4">Welcome back to your workspace</p>
+          <p className="text-white text-xl font-medium mb-4">Welcome back</p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mx-auto shadow-lg"></div>
         </div>
 
