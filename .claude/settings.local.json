@@ -15,12 +15,16 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(npm audit:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Read(/C:\\Users\\USER'S/**)",
+      "Read(/C:\\Users/**)",
+      "Read(/C:\\Users\\USER'S/**)"
     ],
     "deny": [],
     "ask": [],
     "additionalDirectories": [
-      "C:\\Users\\USER''''S\\Desktop"
+      "C:\\Users\\USER''''S\\Desktop",
+      "C:\\Users\\USER''''S"
     ]
   }
 }

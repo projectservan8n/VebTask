@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  SignedIn,
   UserButton,
   useUser
 } from '@clerk/nextjs'
@@ -81,7 +80,7 @@ export default function Home() {
     }
   }
 
-  const toggleTask = async (taskId: any, completed: boolean) => {
+  const toggleTask = async (taskId: string, completed: boolean) => {
     try {
       await updateTask({
         id: taskId,
@@ -92,7 +91,7 @@ export default function Home() {
     }
   }
 
-  const deleteTask = async (taskId: any) => {
+  const deleteTask = async (taskId: string) => {
     try {
       await removeTask({ id: taskId })
     } catch (error) {
