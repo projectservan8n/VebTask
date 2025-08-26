@@ -9,4 +9,11 @@ const nextConfig = {
   },
   output: 'standalone',
   outputFileTracingRoot: __dirname,
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'orbitask-ai-main': false,
+    }
+    return config
+  },
 }
