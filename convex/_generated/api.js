@@ -9,14 +9,9 @@
  * @module
  */
 
-const api = {
-  tasks: {
-    create: { _type: 'mutation' },
-    list: { _type: 'query' },
-    update: { _type: 'mutation' },
-    remove: { _type: 'mutation' }
-  }
-};
+import { anyApi } from "convex/server";
+
+const api = anyApi;
 
 export default api;
 export { api };

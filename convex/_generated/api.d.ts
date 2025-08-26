@@ -14,7 +14,6 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as tasks from "../tasks.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -24,12 +23,15 @@ import type * as tasks from "../tasks.js";
  * const myFunctionReference = api.myModule.myFunction;
  * ```
  */
-declare const api: {
-  tasks: {
-    create: any;
-    list: any;
-    update: any;
-    remove: any;
-  };
-};
+declare const api: FilterApi<
+  ApiFromModules<{
+    "tasks": {
+      create: FunctionReference<"mutation", "public", { title: string; description?: string; userId: string }, any>,
+      list: FunctionReference<"query", "public", { userId: string }, any>,
+      update: FunctionReference<"mutation", "public", { id: any; title?: string; description?: string; completed?: boolean }, any>,
+      remove: FunctionReference<"mutation", "public", { id: any }, any>
+    }
+  }>,
+  FunctionReference<any, "public">
+>;
 export default api;

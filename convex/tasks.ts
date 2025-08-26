@@ -5,18 +5,15 @@ export const create = mutation({
   args: {
     title: v.string(),
     description: v.optional(v.string()),
+    userId: v.string(),
   },
-  handler: async (ctx: any, { title, description }: any) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Not authenticated");
-    }
-    
+  handler: async (ctx, args) => {
+    const { title, description, userId } = args as any;
     const taskId = await ctx.db.insert("tasks", {
       title,
       description,
       completed: false,
-      userId: identity.subject,
+      userId,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     });
@@ -25,16 +22,12 @@ export const create = mutation({
 });
 
 export const list = query({
-  args: {},
-  handler: async (ctx: any) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Not authenticated");
-    }
-    
+  args: { userId: v.string() },
+  handler: async (ctx, args) => {
+    const { userId } = args as any;
     return await ctx.db
       .query("tasks")
-      .withIndex("by_user", (q: any) => q.eq("userId", identity.subject))
+      .withIndex("by_user", (q: any) => q.eq("userId", userId))
       .order("desc")
       .collect();
   },
@@ -47,7 +40,8 @@ export const update = mutation({
     description: v.optional(v.string()),
     completed: v.optional(v.boolean()),
   },
-  handler: async (ctx: any, { id, ...updates }: any) => {
+  handler: async (ctx, args) => {
+    const { id, ...updates } = args as any;
     await ctx.db.patch(id, {
       ...updates,
       updatedAt: Date.now(),
@@ -57,7 +51,8 @@ export const update = mutation({
 
 export const remove = mutation({
   args: { id: v.id("tasks") },
-  handler: async (ctx: any, { id }: any) => {
+  handler: async (ctx, args) => {
+    const { id } = args as any;
     await ctx.db.delete(id);
   },
 });

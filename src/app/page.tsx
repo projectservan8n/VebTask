@@ -1,42 +1,21 @@
 'use client'
 
 import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs'
+import { useQuery, useMutation } from 'convex/react'
+import api from '../../convex/_generated/api'
 import { useState } from 'react'
-
-interface Task {
-  _id: string;
-  title: string;
-  completed: boolean;
-  userId?: string;
-  createdAt: number;
-}
 
 export default function Home() {
   const { user, isSignedIn } = useUser()
   const [newTaskTitle, setNewTaskTitle] = useState('')
-  const [tasks, setTasks] = useState<Task[]>([])
   
-  // Mock functions for task management (ready for Convex integration)
-  const createTask = async ({ title, userId }: { title: string; userId: string }) => {
-    const newTask = {
-      _id: Date.now().toString(),
-      title,
-      completed: false,
-      userId,
-      createdAt: Date.now()
-    }
-    setTasks(prev => [newTask, ...prev])
-  }
+  const tasks = useQuery((api as any).tasks.list, 
+    isSignedIn && user ? { userId: user.id } : 'skip'
+  )
   
-  const updateTask = async ({ id, completed }: { id: string; completed: boolean }) => {
-    setTasks(prev => prev.map(task => 
-      task._id === id ? { ...task, completed } : task
-    ))
-  }
-  
-  const removeTask = async ({ id }: { id: string }) => {
-    setTasks(prev => prev.filter(task => task._id !== id))
-  }
+  const createTask = useMutation((api as any).tasks.create)
+  const updateTask = useMutation((api as any).tasks.update)
+  const removeTask = useMutation((api as any).tasks.remove)
 
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -111,7 +90,7 @@ export default function Home() {
         </form>
 
         <div className="space-y-4">
-          {tasks.map((task) => (
+          {tasks?.map((task: any) => (
             <div
               key={task._id}
               className="flex items-center gap-4 p-4 bg-white rounded-lg shadow border"
